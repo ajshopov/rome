@@ -1,14 +1,18 @@
 import './style.css'
-import trevi from '/cristina-gottardi-I1Lv2yX67GI-unsplash.jpg'
+
+const images = import.meta.glob('/public/*.{png,jpg,jpeg}', { eager: true, as: 'url' })
+
+const imageUrls = Object.values(images)
 
 document.querySelector('#app').innerHTML = `
   <div id="fullpage">
-    <div class="section">
-      <img src="${trevi}"class="section-bg" alt="">
-    </div>
-    <div class="section">Some section</div>
-    <div class="section">Some section</div>
-    <div class="section">Some section</div>
+    ${imageUrls.map((image, index) => `
+      <div class="section">
+        <img src="${image}" class="section-bg" alt="">
+        <div class="section-content">
+        </div>
+      </div>
+    `).join('')}
   </div>
 `
 
