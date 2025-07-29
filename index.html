@@ -19,8 +19,40 @@
                 autoScrolling: true,
                 navigation: true,
                 navigationPosition: 'right',
+                responsiveWidth: 768,
             });
         });
+
+        // Function to handle responsive behavior
+        function handleResize() {
+            const isMobile = window.innerWidth <= 768;
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                if (isMobile) {
+                    section.classList.add('fp-auto-height');
+                } else {
+                    section.classList.remove('fp-auto-height');
+                }
+            });
+
+            // Rebuild fullPage.js to apply changes
+            if (typeof fullpage_api !== 'undefined') {
+                fullpage_api.reBuild();
+            }
+        }
+
+        // Set up ResizeObserver
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                if (entry.target === document.body) {
+                    handleResize(); // Direct call, no timeout
+                }
+            }
+        });
+
+        // Start observing the document body for size changes
+        resizeObserver.observe(document.body);
     </script>
   </body>
 </html>

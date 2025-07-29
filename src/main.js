@@ -9,8 +9,7 @@ document.querySelector('#app').innerHTML = `
     ${imageUrls.map((image, index) => `
       <div class="section">
         <img src="${image}" class="section-bg" alt="">
-        <div class="section-content">
-        </div>
+
       </div>
     `).join('')}
   </div>
